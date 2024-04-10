@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: nutrition_info
+server:
+  port: 8081
+

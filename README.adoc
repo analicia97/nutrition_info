@@ -1,0 +1,30 @@
+= Nutrition Information Service
+
+The Nutrition Information Service is a microservice that provides information about the nutritional value of the menus.
+This service is written in Reactive Java (Webflux), uses the Spring Boot framework and MongoDB as database.
+
+== Instalation
+
+To install this project, follow these steps:
+
+1. Clone the repository from GitLab:
+
+
+2. Open the repository with your favourite IDE.
+
+== Repository Structure
+
+-  root -- project configuration files and docker-compose file
+- `src/main/java` -- Java source code
+- `src/main/resources` -- resources
+- `src/test/java` -- test source code
+- `src/test/resources` -- test resources
+
+== Branches
+
+- `main` -- code of the actual release
+- `develop` -- development of the next release
+- `feature/` -- feature development
+- `bugfix/` -- bugfix development
+- `hotfix/` -- hotfix development
+
