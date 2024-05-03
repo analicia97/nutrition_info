@@ -1,6 +1,6 @@
-package analicia_projects.nutrition_info.core.model;
+package analicia_projects.nutritionInfo.core.model;
 
-import analicia_projects.nutrition_info.api.controller.resource.DishResource;
+import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

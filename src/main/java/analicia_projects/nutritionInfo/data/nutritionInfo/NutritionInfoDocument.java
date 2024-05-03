@@ -1,4 +1,4 @@
-package analicia_projects.nutrition_info.data.nutrition_info;
+package analicia_projects.nutritionInfo.data.nutritionInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

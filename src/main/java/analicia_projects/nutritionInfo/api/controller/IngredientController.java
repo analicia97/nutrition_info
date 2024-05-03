@@ -1,15 +1,14 @@
-package analicia_projects.nutrition_info.api.controller;
+package analicia_projects.nutritionInfo.api.controller;
 
 
-import analicia_projects.nutrition_info.api.controller.resource.DishResource;
-import analicia_projects.nutrition_info.core.service.nutrition_info.DishService;
-import analicia_projects.nutrition_info.core.model.Dish;
+import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
+import analicia_projects.nutritionInfo.core.service.nutritionInfo.DishService;
+import analicia_projects.nutritionInfo.core.model.Dish;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,20 +25,14 @@ public class IngredientController {
     
     @PostMapping
     public Mono<ResponseEntity<DishResource>> addNewDish(
-            @RequestBody @Valid DishResource dish, BindingResult bindingResult) {
-        
-        if (bindingResult.hasErrors()) {
-            return Mono.just(ResponseEntity.badRequest().build());
-        }
+            @RequestBody @Valid DishResource dish) {
         
         return dishService.addDish(Dish.of(dish))
                        .map(DishResource::of)
-                       .map(dishResource -> ResponseEntity.status(HttpStatus.CREATED)
-                                                            .body(dishResource))
+                       .map(dishResource -> ResponseEntity.status(HttpStatus.CREATED).body(dishResource))
                        .onErrorResume(RuntimeException.class, e -> Mono.just(
                                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
                        ));
-
     }
     
 }

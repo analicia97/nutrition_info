@@ -1,6 +1,6 @@
-package analicia_projects.nutrition_info.api.controller.resource;
+package analicia_projects.nutritionInfo.api.controller.resource;
 
-import analicia_projects.nutrition_info.core.model.NutritionInfo;
+import analicia_projects.nutritionInfo.core.model.NutritionInfo;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import reactor.core.publisher.Mono;

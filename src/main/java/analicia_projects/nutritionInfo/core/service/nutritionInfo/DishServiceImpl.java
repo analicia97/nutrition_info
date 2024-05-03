@@ -1,6 +1,6 @@
-package analicia_projects.nutrition_info.core.service.nutrition_info;
+package analicia_projects.nutritionInfo.core.service.nutritionInfo;
 
-import analicia_projects.nutrition_info.core.model.Dish;
+import analicia_projects.nutritionInfo.core.model.Dish;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

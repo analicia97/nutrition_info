@@ -1,7 +1,7 @@
-package analicia_projects.nutrition_info.api.controller.resource;
+package analicia_projects.nutritionInfo.api.controller.resource;
 
-import analicia_projects.nutrition_info.core.model.Dish;
-import analicia_projects.nutrition_info.core.model.Ingredient;
+import analicia_projects.nutritionInfo.core.model.Dish;
+import analicia_projects.nutritionInfo.core.model.Ingredient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

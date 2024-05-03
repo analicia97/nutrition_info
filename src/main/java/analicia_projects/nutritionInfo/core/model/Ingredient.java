@@ -1,4 +1,4 @@
-package analicia_projects.nutrition_info.core.model;
+package analicia_projects.nutritionInfo.core.model;
 
 import reactor.core.publisher.Mono;
 
