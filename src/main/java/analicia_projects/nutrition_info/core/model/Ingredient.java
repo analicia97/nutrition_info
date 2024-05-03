@@ -4,6 +4,7 @@ import reactor.core.publisher.Mono;
 
 public class Ingredient {
     String id;
+    
     String name;
     Double quantityInGrams;
     boolean isPlantBased;
