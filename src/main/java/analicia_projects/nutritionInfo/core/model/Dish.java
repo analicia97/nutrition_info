@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -17,7 +18,7 @@ public class Dish {
     String name;
     String description;
     String price;
-    Flux<Ingredient> ingredients;
+    List<Ingredient> ingredients;
     boolean isVegetarian;
     boolean isVegan;
     boolean isNutritionallyBalanced;

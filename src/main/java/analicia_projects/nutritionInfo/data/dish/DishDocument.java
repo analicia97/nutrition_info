@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(staticName = "empty")
 @AllArgsConstructor(staticName = "of")
@@ -18,7 +20,7 @@ public class DishDocument {
     String name;
     String description;
     String price;
-    Flux<Ingredient> ingredients;
+    List<Ingredient> ingredients;
     
     public static DishDocument of(Dish dish) {
         return new DishDocument(

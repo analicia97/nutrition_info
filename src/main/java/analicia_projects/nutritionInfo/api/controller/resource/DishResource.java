@@ -9,22 +9,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DishResource {
     
-    @NotEmpty(message = "Name is required.")
+    @NotEmpty(message = "Dish name is required.")
     String name;
     
-    @NotEmpty(message = "Description is required.")
+    @NotEmpty(message = "Dish description is required.")
     String description;
     
-    @NotBlank(message = "Price is required.")
+    @NotBlank(message = "Dish price is required.")
     String price;
     
     @NotEmpty(message = "Ingredients are required.")
-    Flux<Ingredient> ingredients;
+    List<Ingredient> ingredients;
     
     boolean isVegetarian;
     boolean isVegan;

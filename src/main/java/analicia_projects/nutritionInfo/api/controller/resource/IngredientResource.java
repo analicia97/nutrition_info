@@ -15,5 +15,5 @@ public class IngredientResource {
     boolean isPlantBased;
     
     @NotNull (message = "Nutrition info is required.")
-    Mono<NutritionInfo> nutritionInfo;
+    NutritionInfo nutritionInfo;
 }

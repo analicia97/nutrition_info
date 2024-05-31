@@ -1,5 +1,8 @@
 package analicia_projects.nutritionInfo.core.model;
 
+import lombok.Data;
+
+@Data
 public class NutritionInfo {
     
     Double carbohydrates;
