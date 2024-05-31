@@ -1,4 +1,4 @@
-package analicia_projects.nutritionInfo.core.service.nutritionInfo;
+package analicia_projects.nutritionInfo.core.service.dish;
 
 import analicia_projects.nutritionInfo.core.model.Dish;
 import reactor.core.publisher.Mono;

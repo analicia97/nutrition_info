@@ -2,7 +2,7 @@ package analicia_projects.nutritionInfo.api.controller;
 
 
 import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
-import analicia_projects.nutritionInfo.core.service.nutritionInfo.DishService;
+import analicia_projects.nutritionInfo.core.service.dish.DishService;
 import analicia_projects.nutritionInfo.core.model.Dish;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/dish")
 @RequiredArgsConstructor
 public class IngredientController {
     

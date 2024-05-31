@@ -37,6 +37,7 @@ public class DishResource {
                 dish.getDescription(),
                 dish.getPrice(),
                 dish.getIngredients(),
+                //TODO añadir los métodos para comprobar si es vegetariano, vegano y equilibrado
                 dish.isVegetarian(),
                 dish.isVegan(),
                 dish.isNutritionallyBalanced()
