@@ -28,7 +28,6 @@ public class DishResource {
     @NotEmpty(message = "Ingredients are required.")
     List<Ingredient> ingredients;
     
-    boolean isVegetarian;
     boolean isVegan;
     boolean isNutritionallyBalanced;
     
@@ -39,8 +38,7 @@ public class DishResource {
                 dish.getDescription(),
                 dish.getPrice(),
                 dish.getIngredients(),
-                //TODO añadir los métodos para comprobar si es vegetariano, vegano y equilibrado
-                dish.isVegetarian(),
+                //TODO añadir los métodos para comprobar si es vegano y equilibrado
                 dish.isVegan(),
                 dish.isNutritionallyBalanced()
         );

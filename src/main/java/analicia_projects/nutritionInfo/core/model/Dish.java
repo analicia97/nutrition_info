@@ -19,7 +19,6 @@ public class Dish {
     String description;
     String price;
     List<Ingredient> ingredients;
-    boolean isVegetarian;
     boolean isVegan;
     boolean isNutritionallyBalanced;
     
@@ -30,7 +29,6 @@ public class Dish {
                 dishResource.getDescription(),
                 dishResource.getPrice(),
                 dishResource.getIngredients(),
-                dishResource.isVegetarian(),
                 dishResource.isVegan(),
                 dishResource.isNutritionallyBalanced()
                 );

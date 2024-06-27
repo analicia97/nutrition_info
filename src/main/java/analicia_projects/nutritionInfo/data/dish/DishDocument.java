@@ -42,7 +42,6 @@ public class DishDocument {
                 dishDocument.getIngredients(),
                 //TODO añadir los métodos para comprobar si es vegetariano, vegano y equilibrado
                 false,
-                false,
                 false
         );
     }

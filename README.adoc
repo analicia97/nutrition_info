@@ -6,7 +6,7 @@ Specifically, it provides the following information:
     - The nutritional composition of an ingredient.
     - The nutritional composition of a dish is the sum of the nutritional composition of its ingredients.
     - Using The Plate Method provides information on whether the dish is nutritionally balanced.
-    - If the dish is suitable for lacto-ovo-vegetarian and vegan people or not.
+    - If the dish is suitable for vegan people or not.
 What's more, it allows the addition of new ingredients and dishes to the database.
 
 This service is written in Reactive Java and uses the Spring WebFlux framework and MongoDB as a database.
