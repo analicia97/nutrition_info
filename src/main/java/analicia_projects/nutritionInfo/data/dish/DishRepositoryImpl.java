@@ -13,6 +13,11 @@ public class DishRepositoryImpl implements DishRepository {
     private final CrudDishRepository crudDishRepository;
     
     @Override
+    public Mono<Dish> getDishById(String id) {
+        return crudDishRepository.findById(id).map(DishDocument::toModel);
+    }
+    
+    @Override
     public Mono<Dish> addDish(Dish dish) {
         return crudDishRepository.save(DishDocument.of(dish)).map(DishDocument::toModel);
     }

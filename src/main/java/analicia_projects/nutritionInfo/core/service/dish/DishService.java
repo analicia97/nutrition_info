@@ -5,5 +5,6 @@ import reactor.core.publisher.Mono;
 
 public interface DishService {
     
-    public Mono<Dish> addDish(Dish dish);
+    Mono<Dish> getDishById(String id);
+    Mono<Dish> addDish(Dish dish);
 }

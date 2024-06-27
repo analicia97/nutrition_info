@@ -16,6 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class DishResource {
     
+    String id;
+    
     @NotEmpty(message = "Dish name is required.")
     String name;
     
@@ -26,7 +28,7 @@ public class DishResource {
     String price;
     
     @NotEmpty(message = "Ingredients are required.")
-    List<Ingredient> ingredients;
+    List<IngredientResource> ingredients;
     
     boolean isVegan;
     boolean isNutritionallyBalanced;
@@ -34,13 +36,20 @@ public class DishResource {
     
     public static DishResource of(Dish dish) {
         return new DishResource(
+                dish.getId(),
                 dish.getName(),
                 dish.getDescription(),
                 dish.getPrice(),
-                dish.getIngredients(),
-                //TODO añadir los métodos para comprobar si es vegano y equilibrado
+                ofIngredientList(dish.getIngredients()),
                 dish.isVegan(),
                 dish.isNutritionallyBalanced()
         );
+    }
+    
+    public static List<IngredientResource> ofIngredientList(List<Ingredient> ingredients) {
+        return Flux.fromIterable(ingredients)
+                .map(IngredientResource::of)
+                .collectList()
+                .block();
     }
 }

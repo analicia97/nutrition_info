@@ -20,6 +20,11 @@ public class DishServiceImpl implements DishService {
     private final DishRepository dishRepository;
     
     @Override
+    public Mono<Dish> getDishById(String id) {
+        return dishRepository.getDishById(id);
+    }
+    
+    @Override
     public Mono<Dish> addDish(Dish dish) {
         dish.setVegan(isVegan(dish));
         dish.setNutritionallyBalanced(isNutritionallyBalanced(dish));
