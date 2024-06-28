@@ -18,7 +18,7 @@ public class DishRepositoryImpl implements DishRepository {
     }
     
     @Override
-    public Mono<Dish> addDish(Dish dish) {
+    public Mono<Dish> save(Dish dish) {
         return crudDishRepository.save(DishDocument.of(dish)).map(DishDocument::toModel);
     }
     

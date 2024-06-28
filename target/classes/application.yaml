@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: nutrition_info
+  main:
+    web-application-type: reactive
+  data:
+    mongodb:
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27017}
+      username: ${MONGO_USERNAME:rootuser}
+      password: ${MONGO_PASSWORD:rootpass}
+      database: ${MONGO_DATABASE:nutri-info}
+      authentication-database: ${MONGO_AUTH_DATABASE:admin}
+
+server:
+  port: 8082
