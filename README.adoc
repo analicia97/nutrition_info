@@ -18,7 +18,9 @@ To install this project, follow these steps:
 1. Clone the repository from GitHub:
   https://github.com/analicia97/nutrition_info.git
 
-2. Open the repository with your favourite IDE.
+2. Run de Docker Machine in your device.
+
+3. Open the repository with your favourite IDE.
 
 == Repository Structure
 

@@ -39,7 +39,7 @@ public class DishServiceImpl implements DishService {
                        .flatMap(existingDish -> {
                            if (existingDish.equals(dish)) {
                                return Mono.just(existingDish)
-                                              .doOnSuccess(retrievedDish -> log.info("Dish with id {} and name {} updated",
+                                              .doOnSuccess(retrievedDish -> log.info("Dish with id {} and name {} was already updated",
                                                       retrievedDish.getId(), retrievedDish.getName()));
                            } else {
                                dish.setVegan(isVegan(dish));
@@ -51,14 +51,19 @@ public class DishServiceImpl implements DishService {
                        });
     }
     
-    private boolean isVegan(Dish dish) {
-        return dish.getIngredients().stream()
-                       .allMatch(Ingredient::isPlantBased);
+    @Override
+    public Mono<Void> deleteDish(String id) {
+        return dishRepository.getDishById(id)
+                .switchIfEmpty(Mono.error(new NoSuchElementException("Dish not found with id: " + id)))
+                .flatMap(dishRepository::delete);
     }
     
+    private boolean isVegan(Dish dish) {
+        return dish.getIngredients().stream().allMatch(Ingredient::isPlantBased);
+    }
+    
+    //TODO Repensar esto un poco
     private boolean isNutritionallyBalanced(Dish dish) {
-        
-        // todo sacar los ingredientes de la base de datos para ver si están o no
         
         List<Ingredient> ingredients = dish.getIngredients();
         

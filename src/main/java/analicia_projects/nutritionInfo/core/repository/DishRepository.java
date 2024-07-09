@@ -8,5 +8,6 @@ public interface DishRepository {
     
     Mono<Dish> getDishById(String id);
     Mono<Dish> save(Dish dish);
+    Mono<Void> delete(Dish dish);
     
 }

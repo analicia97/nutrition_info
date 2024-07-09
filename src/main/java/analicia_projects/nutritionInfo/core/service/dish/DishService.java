@@ -8,4 +8,5 @@ public interface DishService {
     Mono<Dish> getDishById(String id);
     Mono<Dish> addDish(Dish dish);
     Mono<Dish> updateDish(Dish dish);
+    Mono<Void> deleteDish(String id);
 }

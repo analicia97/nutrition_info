@@ -22,5 +22,10 @@ public class DishRepositoryImpl implements DishRepository {
         return crudDishRepository.save(DishDocument.of(dish)).map(DishDocument::toModel);
     }
     
+    @Override
+    public Mono<Void> delete(Dish dish) {
+        return crudDishRepository.delete(DishDocument.of(dish));
+    }
+    
 }
 

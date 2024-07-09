@@ -1,6 +1,7 @@
 package analicia_projects.nutritionInfo.core.model;
 
 import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
+import analicia_projects.nutritionInfo.api.controller.resource.IngredientResource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,20 @@ public class Dish {
     
     public static Dish of(DishResource dishResource) {
         return new Dish(
-                UUID.randomUUID().toString(),
+                dishResource.getId(),
                 dishResource.getName(),
                 dishResource.getDescription(),
                 dishResource.getPrice(),
-                dishResource.getIngredients(),
+                ofIngredientResourceList(dishResource.getIngredients()),
                 dishResource.isVegan(),
                 dishResource.isNutritionallyBalanced()
                 );
+    }
+    
+    public static List<Ingredient> ofIngredientResourceList(List<IngredientResource> ingredients) {
+        return Flux.fromIterable(ingredients)
+                       .map(Ingredient::of)
+                       .collectList()
+                       .block();
     }
 }

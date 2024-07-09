@@ -8,10 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 
 @AllArgsConstructor
+@Data
 public class IngredientResource {
-
+    
+    String id;
     @NotEmpty (message = "Name is required.")
     String name;
     @NotEmpty @NotNull(message = "Quantity is required.")
@@ -24,6 +28,7 @@ public class IngredientResource {
     
     public static IngredientResource of(Ingredient ingredient) {
         return new IngredientResource(
+                ingredient.getId() == null ? UUID.randomUUID().toString() : ingredient.getId(),
                 ingredient.getName(),
                 ingredient.getQuantityInGrams(),
                 ingredient.isPlantBased(),
