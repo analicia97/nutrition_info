@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.NoSuchElementException;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Mono<Ingredient> addIngredient(String dishId, Ingredient ingredient) {
         return dishRepository.getDishById(dishId)
+                       .switchIfEmpty(Mono.error(new NoSuchElementException("Dish not found with id: " + dishId)))
                        .flatMap(dish -> {
                            dish.getIngredients().add(ingredient);
                            return dishService.updateDish(dish);

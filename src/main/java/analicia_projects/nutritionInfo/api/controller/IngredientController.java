@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @RestController
@@ -48,8 +49,12 @@ public class IngredientController {
         return ingredientService.addIngredient(dishId, ingredient)
                        .map(IngredientResource::of)
                        .map(ingredient1 -> {
-                           log.info("Ingredient with id {} added", ingredient1.getId());
+                           log.info("Ingredient with id {} added to the dish with id {}", ingredient1.getId(), dishId);
                            return ResponseEntity.status(HttpStatus.CREATED).body(ingredient1);
+                       })
+                       .onErrorResume(NoSuchElementException.class, e -> {
+                           log.info("Dish with id {} not found", dishId);
+                           return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).<IngredientResource>build());
                        })
                        .onErrorResume(RuntimeException.class, e -> {
                            log.error("Error adding ingredient", e);

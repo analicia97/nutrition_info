@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
-import reactor.core.publisher.Flux;
-
 import java.util.List;
 
 @Getter
@@ -33,16 +31,18 @@ public class DishDocument {
     }
     
     public static Dish toModel(DishDocument dishDocument) {
-        
-        return new Dish(
+        Dish dish = new Dish(
                 dishDocument.getId(),
                 dishDocument.getName(),
                 dishDocument.getDescription(),
                 dishDocument.getPrice(),
                 dishDocument.getIngredients(),
-                //TODO añadir los métodos para comprobar si es vegetariano, vegano y equilibrado
                 false,
                 false
         );
+        dish.setVegan(Dish.isVegan(dish));
+        dish.setNutritionallyBalanced(Dish.isNutritionallyBalanced(dish));
+        return dish;
     }
+    
 }
