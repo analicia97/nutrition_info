@@ -69,26 +69,13 @@ public class IngredientServiceTest {
         StepVerifier.create(result)
                 .verifyComplete();
     }
-    // TODO terminar este test
-//    @Test
-//    public void addIngredientReturnsAddedIngredientWhenDishExists() {
-//        Ingredient ingredientToAdd = new Ingredient("ingredient3Id", "Ingredient 3", 120.0, false, new NutritionInfo());
-//        when(dishRepository.getDishById(anyString())).thenReturn(Mono.just(dish));
-//        when(dishService.updateDish(dish)).thenReturn(Mono.just(dish));
-//
-//        Mono<Ingredient> result = ingredientService.addIngredient("dishId", ingredientToAdd);
-//
-//        StepVerifier.create(result)
-//                .expectNextMatches(ingredient -> ingredient.equals(ingredientToAdd) && dish.getIngredients().contains(ingredientToAdd))
-//                .verifyComplete();
-//    }
-    
+
     @Test
     public void addIngredientThrowsExceptionWhenDishDoesNotExist() {
         Ingredient ingredientToAdd = new Ingredient("ingredient3Id", "Ingredient 3", 120.0, false, new NutritionInfo());
         when(dishRepository.getDishById(anyString())).thenReturn(Mono.empty());
         
-        Mono<Ingredient> result = ingredientService.addIngredient("nonExistentDishId", ingredientToAdd);
+        Mono<Dish> result = ingredientService.addIngredient("nonExistentDishId", ingredientToAdd);
         
         StepVerifier.create(result)
                 .expectError(NoSuchElementException.class)

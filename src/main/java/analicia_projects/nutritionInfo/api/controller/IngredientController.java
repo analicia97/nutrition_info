@@ -1,6 +1,8 @@
 package analicia_projects.nutritionInfo.api.controller;
 
+import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
 import analicia_projects.nutritionInfo.api.controller.resource.IngredientResource;
+import analicia_projects.nutritionInfo.api.controller.swagger.IngredientInterface;
 import analicia_projects.nutritionInfo.core.model.Ingredient;
 import analicia_projects.nutritionInfo.core.service.ingredient.IngredientService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/ingredient")
 @RequiredArgsConstructor
-public class IngredientController {
+public class IngredientController implements IngredientInterface {
     
     private final IngredientService ingredientService;
     
@@ -26,13 +28,13 @@ public class IngredientController {
         return ingredientService.getIngredients(dishId)
                        .map(IngredientResource::of)
                        .collectList()
-                       .map(ingredients -> {
+                       .flatMap(ingredients -> {
                            if (ingredients.isEmpty()) {
                                log.info("No ingredients found for dish with id {}", dishId);
-                               return ResponseEntity.status(HttpStatus.NOT_FOUND).<List<IngredientResource>>build();
+                               return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).<List<IngredientResource>>build());
                            } else {
                                log.info("Ingredients for dish with id {} retrieved", dishId);
-                               return ResponseEntity.ok(ingredients);
+                               return Mono.just(ResponseEntity.ok(ingredients));
                            }
                        })
                        .onErrorResume(Exception.class, e -> {
@@ -41,24 +43,25 @@ public class IngredientController {
                        });
     }
     
+    
     @PostMapping("/{dishId}")
-    public Mono<ResponseEntity<IngredientResource>> addNewIngredientToDish(
+    public Mono<ResponseEntity<DishResource>> addNewIngredientToDish(
             @PathVariable String dishId,
-            @RequestBody Ingredient ingredient) {
+            @RequestBody IngredientResource ingredientResource) {
         
-        return ingredientService.addIngredient(dishId, ingredient)
-                       .map(IngredientResource::of)
-                       .map(ingredient1 -> {
-                           log.info("Ingredient with id {} added to the dish with id {}", ingredient1.getId(), dishId);
-                           return ResponseEntity.status(HttpStatus.CREATED).body(ingredient1);
+        return ingredientService.addIngredient(dishId, Ingredient.of(ingredientResource))
+                       .map(DishResource::of)
+                       .flatMap(ingredient -> {
+                           log.info("Ingredient with id {} added to the dish with id {}", ingredient.getId(), dishId);
+                           return Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(ingredient));
                        })
                        .onErrorResume(NoSuchElementException.class, e -> {
                            log.info("Dish with id {} not found", dishId);
-                           return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).<IngredientResource>build());
+                           return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).<DishResource>build());
                        })
                        .onErrorResume(RuntimeException.class, e -> {
                            log.error("Error adding ingredient", e);
-                           return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<IngredientResource>build());
+                           return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<DishResource>build());
                        });
     }
     

@@ -1,6 +1,7 @@
 package analicia_projects.nutritionInfo.api.controller;
 
 import analicia_projects.nutritionInfo.api.controller.resource.DishResource;
+import analicia_projects.nutritionInfo.api.controller.swagger.DishInterface;
 import analicia_projects.nutritionInfo.core.model.Dish;
 import analicia_projects.nutritionInfo.core.service.dish.DishService;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,17 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/dish")
 @RequiredArgsConstructor
-public class DishController {
+public class DishController implements DishInterface {
     
     private final DishService dishService;
     
     @PostMapping
-    public  Mono<ResponseEntity<DishResource>> addDish(@RequestBody Dish dish) {
-        return dishService.addDish(dish)
+    public  Mono<ResponseEntity<DishResource>> addDish(@RequestBody DishResource dishResource) {
+        return dishService.addDish(Dish.of(dishResource))
                        .map(DishResource::of)
-                       .map(dish1 -> {
-                           log.info("Dish with id {} added", dish1.getId());
-                           return ResponseEntity.status(HttpStatus.CREATED).body(dish1);
+                       .map(dish -> {
+                           log.info("Dish with id {} added", dish.getId());
+                           return ResponseEntity.status(HttpStatus.CREATED).body(dish);
                        })
                        .onErrorResume(RuntimeException.class, e -> {
                            log.error("Error adding dish", e);
@@ -50,14 +51,14 @@ public class DishController {
     }
     
     @PutMapping
-    public Mono<ResponseEntity<DishResource>> updateDish(@RequestBody Dish dish) {
-        return dishService.updateDish(dish)
+    public Mono<ResponseEntity<DishResource>> updateDish(@RequestBody DishResource dishResource) {
+        return dishService.updateDish(Dish.of(dishResource))
                        .map(DishResource::of)
-                       .map(dish1 -> {
-                           log.info("Dish with id {} updated", dish1.getId());
-                           return ResponseEntity.ok(dish1);
+                       .map(dish -> {
+                           log.info("Dish with id {} updated", dish.getId());
+                           return ResponseEntity.ok(dish);
                        })
-                       .switchIfEmpty(Mono.error(new NoSuchElementException("Dish not found with id: " + dish.getId())))
+                       .switchIfEmpty(Mono.error(new NoSuchElementException("Dish not found with id: " + dishResource.getId())))
                        .onErrorResume(RuntimeException.class, e -> {
                            log.error("Error updating dish", e);
                            return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<DishResource>build());

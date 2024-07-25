@@ -3,6 +3,7 @@ package analicia_projects.nutritionInfo.core.model;
 import analicia_projects.nutritionInfo.api.controller.resource.IngredientResource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import java.util.UUID;
 
 @Data
