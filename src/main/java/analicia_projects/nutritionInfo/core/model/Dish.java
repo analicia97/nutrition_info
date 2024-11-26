@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -46,7 +45,6 @@ public class Dish {
         return dish.getIngredients().stream().allMatch(Ingredient::isPlantBased);
     }
     
-    //TODO Repensar esto un poco
     public static boolean isNutritionallyBalanced(Dish dish) {
         
         List<Ingredient> ingredients = dish.getIngredients();
